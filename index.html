@@ -828,6 +828,37 @@
             font-size: 1rem;
             line-height: 1.6;
         }
+        .projects-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
+        .more-projects-button {
+            background-color: #7c3aed; /* Tailwind's violet-600 */
+            color: #ffffff;
+            font-weight: 600;
+            font-size: 14px;
+            padding: 0.75rem 1.75rem;
+            border-radius: 9999px;
+            text-decoration: none;
+            transition: all 0.3s ease-in-out;
+            box-shadow: 0 0 0 transparent;
+        }
+
+        .more-projects-button:hover {
+            background-color: #a78bfa; /* violet-400 */
+            color: #000;
+            transform: scale(1.05);
+            box-shadow: 0 0 20px rgba(167, 139, 250, 0.25);
+        }
+
+        .projects-button-container {
+            display: flex;
+            justify-content: center;
+            margin-top: 2rem;
+        }
+
 
         /* Contact Section */
         .contact-section {
@@ -1324,25 +1355,40 @@
             </div>
         </section>
 
-        <!-- Projects Section -->
+       <!-- Projects Section -->
         <section class="section" id="projects">
-            <h2 class="section-title fade-in">Projects</h2>
-            <div class="projects-grid">
-                <div class="card project-card fade-in">
-                    <h3>WooCommerceGST Chatbot</h3>
-                    <p>
-                        An intelligent chatbot for e-commerce platforms that handles GST-related queries and provides 
-                        real-time support. Built with advanced NLP capabilities and integrated with live systems 
-                        for seamless customer experience.
-                    </p>
-                </div>
-                <div class="card project-card fade-in">
-                    <h3>RAG Document Summarizer</h3>
-                    <p>
-                        A sophisticated document processing system using Retrieval-Augmented Generation to extract 
-                        and summarize key information from complex documents. Leverages state-of-the-art LLMs 
+        <h2 class="section-title fade-in">Projects</h2>
+        <div class="projects-grid">
+
+            <div class="card project-card fade-in">
+            <h3>GPT Language Model from Scratch</h3>
+            <p>
+                Built a transformer-based language model from scratch using only Python and NumPy. Implemented tokenization, attention mechanisms, and autoregressive decoding to simulate GPT-like text generation.
+            </p>
             </div>
+
+            <div class="card project-card fade-in">
+            <h3>Movie Recommendation System</h3>
+            <p>
+                Developed a hybrid movie recommender using both collaborative and content-based filtering. Provided personalized suggestions based on user preferences, and included genre and rating-based filtering.
+            </p>
+            </div>
+            <div class="card project-card fade-in">
+            <h3>Machine Learning Project (From Scratch)</h3>
+            <p>
+                Created a full machine learning pipeline from scratch, without using ML libraries. Included data preprocessing, manual model training, and accuracy tracking for custom classification tasks.
+            </p>
+            </div>
+        </div>
+        <div class="projects-button-container">
+          <a href="internship.html" class="more-projects-button">
+            View More Projects <span class="arrow-icon">↗</span>
+          </a>
+        </div>
+    </div>
+
         </section>
+
         <!-- Contact Section -->
         <section class="section" id="contact">
             <h2 class="section-title fade-in">Get in Touch</h2>
