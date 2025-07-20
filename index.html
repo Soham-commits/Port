@@ -27,17 +27,6 @@
             line-height: 1.6;
         }
 
-        /* Animated Background Blobs */
-        .background-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: 0;
-        }
-
         .blob {
             position: absolute;
             border-radius: 50%;
@@ -445,115 +434,574 @@
             color: #fff;
             transition: all 0.3s ease;
         }
-
-        /* Learning Section */
-        .learning-section {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 2rem;
-            justify-content: center;
-            margin-top: 2rem; /* Reduced from 4rem */
-        }
-
-        .learning-item {
-            flex: 1;
-            min-width: 200px;
-            max-width: 300px;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 20px;
-            padding: 2rem;
-            text-align: center;
-            transition: all 0.3s ease;
-        }
-
-        .learning-icon {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-            display: block;
-        }
-
-        .learning-text {
-            font-size: 1.1rem;
-            color: #fff;
-            opacity: 0.9;
-        }
-
-        /* Working Style Section */
-        .working-style {
-            margin-top: 2rem; /* Reduced from 4rem */
-            padding: 2rem; /* Reduced from 3rem */
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 100px;
-            text-align: center;
+        /* Neural Network Workspace */
+        .neural-network-workspace {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
             position: relative;
             overflow: hidden;
         }
 
-        .working-style::before {
+        .network-container {
+            position: relative;
+            background: rgba(10, 10, 10, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(59, 130, 246, 0.2);
+            border-radius: 32px;
+            padding: 3rem;
+            min-height: 500px;
+            overflow: hidden;
+        }
+
+        .network-container::before {
             content: '';
             position: absolute;
-            inset: 0;
-
-            background: linear-gradient(90deg, 
-                rgba(99, 102, 241, 0.1),
-                rgba(167, 139, 250, 0.1),
-                rgba(236, 72, 153, 0.1)
-            );
-            border-radius: 100px;
-            z-index: -1;
-            opacity: 0.5;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: 
+                radial-gradient(circle at 20% 30%, rgba(59, 130, 246, 0.1), transparent 40%),
+                radial-gradient(circle at 80% 70%, rgba(139, 92, 246, 0.1), transparent 40%),
+                radial-gradient(circle at 50% 50%, rgba(16, 185, 129, 0.05), transparent 50%);
+            border-radius: 32px;
+            z-index: 0;
         }
 
-        .working-style p {
-            font-size: 1.2rem;
-            color: #fff;
-            opacity: 0.9;
-            line-height: 1.7;
-            max-width: 800px;
-            margin: 0 auto;
+        .neural-layers {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            z-index: 2;
+            height: 400px;
+            padding: 2rem 0;
         }
 
-        /* Personal Touch */
-        .personal-touch {
-            margin-top: 2rem; /* Reduced from 4rem */
-            text-align: center;
-        }
-
-        .personal-blob {
-            display: inline-flex;
+        .neural-layer {
+            display: flex;
+            flex-direction: column;
             align-items: center;
             gap: 1rem;
-            background: rgba(255, 255, 255, 0.03);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.05);
-            border-radius: 100px;
-            padding: 1.5rem 3rem;
-            transition: all 0.3s ease;
             position: relative;
         }
 
-        .personal-blob::before {
+        .layer-label {
+            font-size: 1.1rem;
+            font-weight: 700;
+            color: #3b82f6;
+            text-transform: uppercase;
+            letter-spacing: 0.1em;
+            margin-bottom: 1rem;
+            padding: 0.5rem 1rem;
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            border-radius: 20px;
+            backdrop-filter: blur(10px);
+        }
+
+        .neuron-group {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            align-items: center;
+        }
+
+        .neuron {
+            position: relative;
+            cursor: pointer;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            animation: neuronPulse 3s ease-in-out infinite;
+        }
+
+        .neuron:nth-child(1) { animation-delay: 0s; }
+        .neuron:nth-child(2) { animation-delay: 0.5s; }
+        .neuron:nth-child(3) { animation-delay: 1s; }
+        .neuron:nth-child(4) { animation-delay: 1.5s; }
+
+        @keyframes neuronPulse {
+            0%, 100% { 
+                transform: scale(1);
+                filter: brightness(1);
+            }
+            50% { 
+                transform: scale(1.05);
+                filter: brightness(1.2);
+            }
+        }
+
+        .neuron-core {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(255, 255, 255, 0.1), rgba(59, 130, 246, 0.2));
+            backdrop-filter: blur(15px);
+            border: 2px solid rgba(59, 130, 246, 0.4);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            transition: all 0.3s ease;
+            box-shadow: 
+                0 0 20px rgba(59, 130, 246, 0.3),
+                inset 0 0 20px rgba(255, 255, 255, 0.1);
+        }
+
+        .neuron-core::before {
             content: '';
             position: absolute;
-            inset: 0;
-            background: radial-gradient(circle at 50% 50%, rgba(167, 139, 250, 0.15), transparent 70%);
-            border-radius: 100px;
-            z-index: -1;
+            width: 20px;
+            height: 20px;
+            border-radius: 50%;
+            background: rgba(59, 130, 246, 0.8);
+            box-shadow: 0 0 15px rgba(59, 130, 246, 0.6);
+            animation: coreGlow 2s ease-in-out infinite alternate;
         }
 
-        .personal-icon {
-            font-size: 2rem;
-            animation: float 3s ease-in-out infinite;
+        @keyframes coreGlow {
+            0% { 
+                opacity: 0.6;
+                transform: scale(0.8);
+            }
+            100% { 
+                opacity: 1;
+                transform: scale(1.2);
+            }
         }
 
-        .personal-text {
-            font-size: 1.1rem;
+        .neuron:hover .neuron-core {
+            transform: scale(1.2);
+            border-color: rgba(139, 92, 246, 0.8);
+            box-shadow: 
+                0 0 40px rgba(139, 92, 246, 0.5),
+                inset 0 0 30px rgba(255, 255, 255, 0.2);
+        }
+
+        .neuron:hover .neuron-core::before {
+            background: rgba(139, 92, 246, 1);
+            box-shadow: 0 0 25px rgba(139, 92, 246, 0.8);
+        }
+
+        .neuron-label {
+            position: absolute;
+            top: 70px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 0.8rem;
+            font-weight: 600;
             color: #fff;
-            opacity: 0.9;
+            text-align: center;
+            white-space: nowrap;
+            padding: 0.25rem 0.75rem;
+            background: rgba(10, 10, 10, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 12px;
+            backdrop-filter: blur(10px);
+            opacity: 0;
+            transition: all 0.3s ease;
+        }
+
+        .neuron:hover .neuron-label {
+            opacity: 1;
+            transform: translateX(-50%) translateY(-5px);
+        }
+
+        /* Color variants for different neuron types */
+        .neuron[data-type="problem"] .neuron-core { border-color: rgba(236, 72, 153, 0.4); }
+        .neuron[data-type="problem"] .neuron-core::before { background: rgba(236, 72, 153, 0.8); }
+        .neuron[data-type="problem"]:hover .neuron-core { border-color: rgba(236, 72, 153, 0.8); }
+
+        .neuron[data-type="data"] .neuron-core { border-color: rgba(16, 185, 129, 0.4); }
+        .neuron[data-type="data"] .neuron-core::before { background: rgba(16, 185, 129, 0.8); }
+        .neuron[data-type="data"]:hover .neuron-core { border-color: rgba(16, 185, 129, 0.8); }
+
+        .neuron[data-type="requirements"] .neuron-core { border-color: rgba(245, 158, 11, 0.4); }
+        .neuron[data-type="requirements"] .neuron-core::before { background: rgba(245, 158, 11, 0.8); }
+        .neuron[data-type="requirements"]:hover .neuron-core { border-color: rgba(245, 158, 11, 0.8); }
+
+        .neuron[data-type="solution"] .neuron-core { border-color: rgba(139, 92, 246, 0.6); }
+        .neuron[data-type="solution"] .neuron-core::before { background: rgba(139, 92, 246, 1); }
+        .neuron[data-type="solution"]:hover .neuron-core { border-color: rgba(139, 92, 246, 1); }
+
+        .neuron[data-type="impact"] .neuron-core { border-color: rgba(59, 130, 246, 0.6); }
+        .neuron[data-type="impact"] .neuron-core::before { background: rgba(59, 130, 246, 1); }
+        .neuron[data-type="impact"]:hover .neuron-core { border-color: rgba(59, 130, 246, 1); }
+
+        .neural-connections {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        #neuralCanvas {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+        .activation-indicator {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            z-index: 3;
+        }
+
+        .pulse-ring {
+            width: 16px;
+            height: 16px;
+            border-radius: 50%;
+            background: #10b981;
+            position: relative;
+            animation: pulseRing 2s ease-in-out infinite;
+        }
+
+        .pulse-ring::after {
+            content: '';
+            position: absolute;
+            top: -4px;
+            left: -4px;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            border: 2px solid #10b981;
+            opacity: 0;
+            animation: ringExpand 2s ease-in-out infinite;
+        }
+
+        @keyframes pulseRing {
+            0%, 100% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.2); opacity: 0.8; }
+        }
+
+        @keyframes ringExpand {
+            0% { 
+                transform: scale(0.8);
+                opacity: 0.8;
+            }
+            100% { 
+                transform: scale(2);
+                opacity: 0;
+            }
+        }
+
+        .activation-text {
+            font-size: 0.85rem;
+            font-weight: 600;
+            color: #10b981;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Responsive Design for Neural Network */
+        @media (max-width: 1024px) {
+            .neural-layers {
+                flex-direction: column;
+                height: auto;
+                gap: 3rem;
+            }
+            
+            .neuron-group {
+                flex-direction: row;
+                flex-wrap: wrap;
+                justify-content: center;
+                gap: 1rem;
+            }
+            
+            .layer-label {
+                margin-bottom: 0.5rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .neural-network-workspace {
+                padding: 2rem 1rem;
+            }
+            
+            .network-container {
+                padding: 2rem;
+                min-height: 400px;
+            }
+            
+            .neuron-core {
+                width: 50px;
+                height: 50px;
+            }
+            
+            .neuron-core::before {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .neuron-label {
+                top: 60px;
+                font-size: 0.7rem;
+            }
+            
+            .layer-label {
+                font-size: 0.9rem;
+                padding: 0.375rem 0.75rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .neural-layers {
+                gap: 2rem;
+            }
+            
+            .neuron-group {
+                gap: 0.75rem;
+            }
+            
+            .neuron-core {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .neuron-core::before {
+                width: 12px;
+                height: 12px;
+            }
+            
+            .neuron-label {
+                top: 50px;
+                font-size: 0.65rem;
+                padding: 0.2rem 0.5rem;
+            }
+        }
+
+        /* Fun Fact Terminal */
+        .fun-fact-container {
+            max-width: 800px;
+            margin: 2rem auto;
+            position: relative;
+        }
+
+        .terminal-window {
+            background: rgba(15, 15, 15, 0.95);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 16px;
+            padding: 0;
+            position: relative;
+            overflow: hidden;
+            box-shadow: 
+                0 20px 40px rgba(0, 0, 0, 0.3),
+                0 0 0 1px rgba(255, 255, 255, 0.05);
+        }
+
+        .terminal-header {
+            background: rgba(30, 30, 30, 0.8);
+            backdrop-filter: blur(10px);
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .terminal-buttons {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .terminal-button {
+            width: 12px;
+            height: 12px;
+            border-radius: 50%;
+            background: #ff5f56;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .terminal-button:nth-child(2) {
+            background: #ffbd2e;
+        }
+
+        .terminal-button:nth-child(3) {
+            background: #27ca3f;
+        }
+
+        .terminal-button:hover {
+            transform: scale(1.1);
+            box-shadow: 0 0 10px currentColor;
+        }
+
+        .terminal-title {
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.85rem;
+            color: #a1a1aa;
+            font-weight: 500;
+        }
+
+        .terminal-content {
+            padding: 1.5rem;
+            font-family: 'Monaco', 'Menlo', 'Ubuntu Mono', monospace;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            min-height: 200px;
+            position: relative;
+        }
+
+        .terminal-line {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 0.75rem;
+            opacity: 0;
+            transform: translateX(-10px);
+            animation: terminalType 0.8s ease forwards;
+        }
+
+        .terminal-line:nth-child(1) { animation-delay: 0.5s; }
+        .terminal-line:nth-child(2) { animation-delay: 1.2s; }
+        .terminal-line:nth-child(3) { animation-delay: 1.9s; }
+        .terminal-line:nth-child(4) { animation-delay: 2.6s; }
+        .terminal-line:nth-child(5) { animation-delay: 3.3s; }
+
+        @keyframes terminalType {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
+        }
+
+        .terminal-prompt {
+            color: #10b981;
+            margin-right: 0.75rem;
+            font-weight: 600;
+            white-space: nowrap;
+        }
+
+        .terminal-command {
+            color: #3b82f6;
+            font-weight: 500;
+        }
+
+        .terminal-output {
+            color: #e5e7eb;
+            flex: 1;
+        }
+
+        .terminal-highlight {
+            color: #fbbf24;
+            font-weight: 600;
+        }
+
+        .terminal-success {
+            color: #10b981;
+            font-weight: 500;
+        }
+
+        .terminal-cursor {
+            display: inline-block;
+            width: 2px;
+            height: 1.2em;
+            background: #3b82f6;
+            margin-left: 2px;
+            animation: cursorBlink 1s infinite;
+            vertical-align: text-bottom;
+        }
+
+        @keyframes cursorBlink {
+            0%, 50% { opacity: 1; }
+            51%, 100% { opacity: 0; }
+        }
+
+        .fun-fact-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-top: 1.5rem;
+        }
+
+        .stat-item {
+            background: rgba(255, 255, 255, 0.03);
+            backdrop-filter: blur(10px);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            padding: 1rem;
+            text-align: center;
+            transition: all 0.3s ease;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: statFadeIn 0.6s ease forwards;
+        }
+
+        .stat-item:nth-child(1) { animation-delay: 4s; }
+        .stat-item:nth-child(2) { animation-delay: 4.2s; }
+        .stat-item:nth-child(3) { animation-delay: 4.4s; }
+
+        @keyframes statFadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .stat-item:hover {
+            transform: translateY(-3px);
+            background: rgba(255, 255, 255, 0.05);
+            border-color: rgba(255, 255, 255, 0.1);
+        }
+
+        .stat-number {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3b82f6;
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .stat-label {
+            font-size: 0.85rem;
+            color: #a1a1aa;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .fun-fact-container {
+                margin: 1.5rem auto;
+            }
+            
+            .terminal-content {
+                padding: 1rem;
+                font-size: 0.85rem;
+                min-height: 150px;
+            }
+            
+            .terminal-header {
+                padding: 0.75rem 1rem;
+            }
+            
+            .terminal-title {
+                font-size: 0.75rem;
+            }
+            
+            .fun-fact-stats {
+                grid-template-columns: 1fr;
+                gap: 0.75rem;
+                margin-top: 1rem;
+            }
+            
+            .stat-item {
+                padding: 0.75rem;
+            }
+            
+            .stat-number {
+                font-size: 1.25rem;
+            }
         }
 
         /* 3D Background Styles */
@@ -568,200 +1016,184 @@
             pointer-events: none;
         }
 
-        /* 3D Orbit Tech Stack */
-        .orbit-container {
+        /* Enhanced Tech Stack Container */
+        .tech-stack-container {
+            max-width: 1200px;
+            margin: 3rem auto;
+            padding: 0 2rem;
             position: relative;
-            width: 800px;
-            height: 800px;
-            margin: 4rem auto;
-            perspective: 1500px;
-            transform-style: preserve-3d;
-            display: flex;
-            justify-content: center;
-            align-items: center;
         }
 
-        .orbit-center {
+        .tech-stack-container::before {
+            content: '';
             position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            font-size: 2.5rem;
-            font-weight: bold;
-            color: #fff;
-            text-align: center;
-            z-index: 2;
-            background: linear-gradient(135deg, #3b82f6 0%, #8b5cf6 100%);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-
-        .orbit-ring {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            transform-style: preserve-3d;
-            animation: orbitRotate 45s infinite linear;
-        }
-
-        .orbit-ring:hover {
-            animation-play-state: paused;
-        }
-
-        .tech-item {
-            position: absolute;
-            width: 160px;
-            height: 160px;
-            left: 50%;
-            top: 50%;
-            transform-origin: 50% 50% -250px; /* Reduced orbit radius for better visibility */
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(10px);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 30px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 1rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            padding: 1.5rem;
-        }
-
-        .tech-item:hover {
-            transform: scale(1.1) translateZ(20px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .tech-icon {
-            font-size: 3rem;
-            background: linear-gradient(135deg, #3b82f6, #a78bfa);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: transform 0.3s ease;
-        }
-
-        .tech-name {
-            font-size: 1.2rem;
-            font-weight: 600;
-            color: #fff;
-            opacity: 0.9;
-            margin-bottom: 0.5rem;
-        }
-        
-        .tech-description {
-            font-size: 0.9rem;
-            color: #a1a1aa;
-            text-align: center;
-            line-height: 1.4;
-        }
-
-        @keyframes orbitRotate {
-            from {
-                transform: rotateY(0deg);
-            }
-            to {
-                transform: rotateY(360deg);
-            }
-        }
-
-        .tech-item {
-            position: absolute;
-            background: rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(16px);
-            -webkit-backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            border-radius: 20px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: center;
-            gap: 0.5rem;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            padding: 1rem;
-            z-index: 1;
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-        }
-
-        .tech-item:hover {
-            transform: scale(1.2) translateZ(30px);
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.3);
-            box-shadow: 
-                0 4px 30px rgba(59, 130, 246, 0.3),
-                inset 0 0 20px rgba(255, 255, 255, 0.05);
-            backdrop-filter: blur(20px);
-            -webkit-backdrop-filter: blur(20px);
-        }
-
-        .tech-icon {
-            font-size: 2.5rem;
-            background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-            -webkit-background-clip: text;
-            background-clip: text;
-            -webkit-text-fill-color: transparent;
-            transition: transform 0.3s ease;
-        }
-
-        .tech-name {
-            font-size: 1rem;
-            font-weight: 600;
-            color: #fff;
-            opacity: 0;
-            transition: opacity 0.3s ease;
-        }
-
-        .tech-item:hover .tech-name {
-            opacity: 1;
-        }
-
-        /* Tech Stack Tooltips */
-        .tech-tooltip {
-            position: absolute;
-            bottom: -40px;
+            top: -20px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(0, 0, 0, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 0.5rem 1rem;
-            border-radius: 100px;
-            font-size: 0.8rem;
-            color: #fff;
+            width: 80%;
+            height: 4px;
+            background: linear-gradient(90deg, 
+                transparent 0%,
+                #3b82f6 25%, 
+                #8b5cf6 50%, 
+                #ec4899 75%, 
+                transparent 100%
+            );
+            border-radius: 2px;
+            opacity: 0.6;
+        }
+
+        .tech-stack-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 2rem;
+            justify-content: center;
+            animation: fadeInStagger 1s ease-out forwards;
+        }
+
+        @keyframes fadeInStagger {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes pulse {
+            0%, 100% {
+                opacity: 1;
+                transform: scale(1);
+            }
+            50% {
+                opacity: 0.8;
+                transform: scale(1.02);
+            }
+        }
+
+        .tech-stack-item:nth-child(4n+1) {
+            animation-delay: 0.1s;
+        }
+
+        .tech-stack-item:nth-child(4n+2) {
+            animation-delay: 0.2s;
+        }
+
+        .tech-stack-item:nth-child(4n+3) {
+            animation-delay: 0.3s;
+        }
+
+        .tech-stack-item:nth-child(4n+4) {
+            animation-delay: 0.4s;
+        }
+
+        .tech-stack-item {
+            background: rgba(255, 255, 255, 0.05);
+            backdrop-filter: blur(15px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50px;
+            padding: 0.75rem 1.25rem;
+            text-align: center;
+            transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
             white-space: nowrap;
+            transform: translateY(0) scale(1);
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .tech-stack-item:hover {
+            transform: translateY(-8px) scale(1.05);
+            background: rgba(255, 255, 255, 0.1);
+            border-color: rgba(255, 255, 255, 0.25);
+            box-shadow: 
+                0 15px 40px rgba(0, 0, 0, 0.2),
+                0 0 0 1px rgba(255, 255, 255, 0.1),
+                0 0 30px rgba(139, 92, 246, 0.2);
+        }
+
+        .tech-stack-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background: linear-gradient(90deg, 
+                #3b82f6 0%, 
+                #8b5cf6 25%, 
+                #ec4899 50%, 
+                #f59e0b 75%, 
+                #10b981 100%
+            );
             opacity: 0;
-            transition: all 0.3s ease;
-            pointer-events: none;
-            z-index: 100;
+            transition: opacity 0.4s ease;
+            border-radius: 50px 50px 0 0;
         }
 
-        .tech-item:hover .tech-tooltip {
+        .tech-stack-item:hover::before {
             opacity: 1;
-            bottom: -50px;
         }
 
-        @media (max-width: 768px) {
-            .rotating-stack {
-                width: 300px;
-                height: 300px;
-            }
+        .tech-stack-item::after {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background: radial-gradient(circle at 50% 50%, 
+                rgba(139, 92, 246, 0.1), 
+                transparent 70%
+            );
+            opacity: 0;
+            transition: opacity 0.4s ease;
+            border-radius: 50px;
+            z-index: -1;
+        }
 
-            .tech-item {
-                width: 80px;
-                height: 80px;
-            }
+        .tech-stack-item:hover::after {
+            opacity: 1;
+        }
 
-            .tech-icon {
-                font-size: 1.5rem;
-            }
+        .tech-stack-icon {
+            font-size: 1.5rem;
+            margin-bottom: 0;
+            display: inline;
+            filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.3));
+            transition: all 0.4s ease;
+            position: relative;
+            z-index: 2;
+        }
 
-            .tech-name {
-                font-size: 0.8rem;
-            }
+        .tech-stack-item:hover .tech-stack-icon {
+            transform: scale(1.2) rotateY(15deg);
+            filter: drop-shadow(0 4px 8px rgba(139, 92, 246, 0.4));
+        }
+
+        .tech-stack-name {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: #fff;
+            margin-bottom: 0;
+            line-height: 1;
+            text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+            transition: all 0.3s ease;
+            letter-spacing: 0.025em;
+        }
+
+        .tech-stack-item:hover .tech-stack-name {
+            color: #f8fafc;
+            text-shadow: 0 3px 6px rgba(139, 92, 246, 0.3);
+            transform: translateX(2px);
+        }
+
+        .tech-stack-description {
+            display: none;
         }
 
         /* Responsive Adjustments */
@@ -773,6 +1205,10 @@
             .working-style {
                 border-radius: 32px;
                 padding: 2.5rem;
+            }
+            
+            .tech-stack-grid {
+                gap: 0.5rem;
             }
         }
 
@@ -803,60 +1239,327 @@
                 padding: 2rem;
             }
             
-            .personal-blob {
-                padding: 1.25rem 2rem;
+            .tech-stack-container {
+                padding: 0 1rem;
+                margin: 2rem auto;
+            }
+            
+            .tech-stack-grid {
+                gap: 0.375rem;
+            }
+            
+            .tech-stack-item {
+                padding: 0.375rem 0.75rem;
+                gap: 0.375rem;
+            }
+            
+            .tech-stack-icon {
+                font-size: 1rem;
+            }
+            
+            .tech-stack-name {
+                font-size: 0.75rem;
             }
         }
 
-        /* Projects Section */
+        /* Clean Projects Section */
+        .projects-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
         .projects-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            grid-template-columns: repeat(3, 1fr);
             gap: 2rem;
-            margin-top: 2rem;
+            margin-top: 3rem;
+            align-items: stretch;
         }
 
-        .project-card h3 {
-            font-size: 1.5rem;
-            font-weight: 600;
-            margin-bottom: 1rem;
+        .project-card {
+            background: rgba(10, 10, 10, 0.8);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 24px;
+            padding: 0;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            height: 480px;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .project-card:hover {
+            transform: translateY(-5px);
+            border-color: rgba(255, 255, 255, 0.2);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+        }
+
+        .project-header {
+            position: relative;
+            height: 120px;
+            background: rgba(255, 255, 255, 0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 24px 24px 0 0;
+            overflow: hidden;
+            padding: 2rem;
+        }
+
+        .project-content {
+            padding: 1.5rem;
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            position: relative;
+            z-index: 2;
+        }
+
+        .project-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 0.75rem;
             color: #ffffff;
+            line-height: 1.3;
+            transition: all 0.3s ease;
         }
 
-        .project-card p {
+        .project-card:hover .project-title {
+            color: #3b82f6;
+        }
+
+        .project-description {
             color: #a1a1aa;
+            font-size: 0.95rem;
+            line-height: 1.6;
+            margin-bottom: 1rem;
+            flex: 1;
+        }
+
+        .project-tech-stack {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .tech-tag {
+            background: rgba(59, 130, 246, 0.1);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: #3b82f6;
+            padding: 0.25rem 0.75rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        .tech-tag:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+            transform: translateY(-1px);
+        }
+
+        .project-stats {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding-top: 1rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .project-status {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
+            color: #10b981;
+            font-weight: 500;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            background: #10b981;
+            border-radius: 50%;
+        }
+
+        .project-links {
+            display: flex;
+            gap: 0.75rem;
+        }
+
+        .project-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 36px;
+            height: 36px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: #d1d5db;
+            text-decoration: none;
+            transition: all 0.3s ease;
             font-size: 1rem;
+        }
+
+        .project-link:hover {
+            background: rgba(59, 130, 246, 0.2);
+            border-color: rgba(59, 130, 246, 0.5);
+            color: #3b82f6;
+            transform: translateY(-2px);
+        }
+
+        .projects-showcase-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+
+        .projects-subtitle {
+            font-size: 1.1rem;
+            color: #a1a1aa;
+            max-width: 600px;
+            margin: 0 auto;
             line-height: 1.6;
         }
+
         .projects-button-container {
             display: flex;
             justify-content: center;
-            margin-top: 2rem;
+            margin-top: 3rem;
         }
 
         .more-projects-button {
-            background-color: #7c3aed; /* Tailwind's violet-600 */
+            background: linear-gradient(135deg, #7c3aed 0%, #a855f7 100%);
             color: #ffffff;
             font-weight: 600;
-            font-size: 14px;
-            padding: 0.75rem 1.75rem;
-            border-radius: 9999px;
+            font-size: 1rem;
+            padding: 1rem 2rem;
+            border-radius: 50px;
             text-decoration: none;
-            transition: all 0.3s ease-in-out;
-            box-shadow: 0 0 0 transparent;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 20px rgba(124, 58, 237, 0.3);
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .more-projects-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, #a855f7 0%, #c084fc 100%);
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+
+        .more-projects-button:hover::before {
+            opacity: 1;
         }
 
         .more-projects-button:hover {
-            background-color: #a78bfa; /* violet-400 */
-            color: #000;
-            transform: scale(1.05);
-            box-shadow: 0 0 20px rgba(167, 139, 250, 0.25);
+            transform: translateY(-3px);
+            box-shadow: 0 8px 30px rgba(124, 58, 237, 0.4);
         }
 
-        .projects-button-container {
-            display: flex;
-            justify-content: center;
-            margin-top: 2rem;
+        .more-projects-button span {
+            position: relative;
+            z-index: 1;
+        }
+
+        .arrow-icon {
+            transition: transform 0.3s ease;
+            position: relative;
+            z-index: 1;
+        }
+
+        .more-projects-button:hover .arrow-icon {
+            transform: translateX(3px) translateY(-3px);
+        }
+
+        /* Color variants for different project types */
+        .project-card[data-type="ai"] .project-header {
+            background: rgba(59, 130, 246, 0.1);
+        }
+
+        .project-card[data-type="ai"] .tech-tag {
+            background: rgba(59, 130, 246, 0.1);
+            border-color: rgba(59, 130, 246, 0.3);
+            color: #3b82f6;
+        }
+
+        .project-card[data-type="ml"] .project-header {
+            background: rgba(16, 185, 129, 0.1);
+        }
+
+        .project-card[data-type="ml"] .tech-tag {
+            background: rgba(16, 185, 129, 0.1);
+            border-color: rgba(16, 185, 129, 0.3);
+            color: #10b981;
+        }
+
+        .project-card[data-type="web"] .project-header {
+            background: rgba(236, 72, 153, 0.1);
+        }
+
+        .project-card[data-type="web"] .tech-tag {
+            background: rgba(236, 72, 153, 0.1);
+            border-color: rgba(236, 72, 153, 0.3);
+            color: #ec4899;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 1024px) {
+            .projects-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 1.5rem;
+            }
+            
+            .project-card {
+                height: 450px;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .projects-container {
+                padding: 0 1rem;
+            }
+            
+            .projects-grid {
+                grid-template-columns: 1fr;
+                gap: 1.25rem;
+                margin-top: 2rem;
+            }
+            
+            .project-card {
+                height: 450px;
+            }
+            
+            .project-header {
+                height: 100px;
+            }
+            
+            .project-content {
+                padding: 1.25rem;
+            }
+            
+            .project-title {
+                font-size: 1.1rem;
+            }
+            
+            .project-description {
+                font-size: 0.9rem;
+            }
         }
 
 
@@ -988,6 +1691,22 @@
         .fade-in.visible {
             opacity: 1;
             transform: translateY(0);
+        }
+
+        /* Ensure tech stack and learning sections are always visible */
+        .tech-stack-container,
+        .learning-interactive-container {
+            opacity: 1 !important;
+            transform: none !important;
+            visibility: visible !important;
+            display: block !important;
+        }
+
+        .tech-stack-item {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            visibility: visible !important;
+            display: flex !important;
         }
 
         /* Responsive Design */
@@ -1255,7 +1974,7 @@
             }
         }
     </style>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+    <script src="tech-fix.js"></script>
 </head>
 <body>
     <!-- Floating Navbar -->
@@ -1309,47 +2028,208 @@
                 </div>
 
                 <!-- Tech Stack -->
-                <h3 class="section-subtitle fade-in"></h3>
-                <div class="orbit-container fade-in">
-                    <div class="orbit-center">Tech Stack</div>
-                    <div class="orbit-ring" id="orbitRing">
-                        <!-- Tech items will be added by JavaScript -->
+                <h3 class="section-subtitle fade-in">Tech Stack</h3>
+                <div class="tech-stack-container fade-in">
+                    <div class="tech-stack-grid" id="techStackGrid">
+                        <!-- Tech items will be added by JavaScript with enhanced animations -->
                     </div>
                 </div>
+                        <style>
+            .working-style-section {
+                max-width: 1400px;
+                margin: 0 auto;
+                padding: 4rem 2rem;
+            }
 
-                <!-- Currently Learning -->
-                <h3 class="section-subtitle fade-in">Currently Learning</h3>
-                <div class="learning-section fade-in">
-                    <div class="learning-item">
-                        <span class="learning-icon">🎯</span>
-                        <span class="learning-text">Automation & Integrations</span>
-                    </div>
-                    <div class="learning-item">
-                        <span class="learning-icon">🔄</span>
-                        <span class="learning-text">Custom LLM workflows</span>
-                    </div>
-                    <div class="learning-item">
-                        <span class="learning-icon">💡</span>
-                        <span class="learning-text">Exploring generative AI for music & creativity</span>
-                    </div>
-                    <div class="learning-item">
-                        <span class="learning-icon">🧠</span>
-                        <span class="learning-text">PyTorch Transformers</span>
-                    </div>
+            .working-style-container {
+                display: grid;
+                grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+                gap: 2rem;
+                margin-top: 3rem;
+            }
+
+            .working-style-item {
+                background: rgba(255, 255, 255, 0.05);
+                backdrop-filter: blur(15px);
+                border: 1px solid rgba(255, 255, 255, 0.1);
+                border-radius: 20px;
+                padding: 2rem;
+                transition: all 0.3s ease;
+            }
+
+            .working-style-item:hover {
+                transform: translateY(-5px);
+                box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+            }
+
+            @media (max-width: 768px) {
+                .working-style-section {
+                    padding: 3rem 1rem;
+                }
+
+                .working-style-container {
+                    grid-template-columns: 1fr;
+                    gap: 1.5rem;
+                }
+            }
+        </style>
+        <section class="working-style-section">
+            <!-- Working Style -->
+            <h3 class="section-subtitle fade-in">Working Style</h3>
+            <div class="working-style-container">
+                <div class="working-style-item">
+                    <h4>Deep Thinking & Rapid Execution</h4>
+                    <p>I believe in a balanced approach, combining deep, first-principles thinking with a bias for action and rapid execution to solve complex problems effectively.</p>
                 </div>
-
-                <!-- Working Style -->
-                <h3 class="section-subtitle fade-in">Working Style</h3>
-                <div class="working-style fade-in">
-                    <p>I love turning raw ideas into practical tools and workflows. I'm a fast learner, team player, and I document everything I build so others can follow along.</p>
+                <div class="working-style-item">
+                    <h4>Advanced & Beautiful Products</h4>
+                    <p>I'm passionate about building products that are not only technologically advanced and powerful but also beautiful, intuitive, and a pleasure for people to use.</p>
+                </div>
+                <div class="working-style-item">
+                    <h4>User-Focused Design</h4>
+                    <p>I always start with the user. Understanding their needs and pain points is key to creating solutions that are not just functional but also meaningful and impactful.</p>
+                </div>
+            </div>
+                <div class="neural-network-workspace fade-in">
+                    <div class="network-container">
+                        <div class="neural-layers">
+                            <!-- Input Layer -->
+                            <div class="neural-layer input-layer">
+                                <div class="layer-label">Input</div>
+                                <div class="neuron-group">
+                                    <div class="neuron" data-type="problem">
+                                        <div class="neuron-core"></div>
+                                        <div class="neuron-label">Problem</div>
+                                    </div>
+                                    <div class="neuron" data-type="data">
+                                        <div class="neuron-core"></div>
+                                        <div class="neuron-label">Data</div>
+                                    </div>
+                                    <div class="neuron" data-type="requirements">
+                                        <div class="neuron-core"></div>
+                                        <div class="neuron-label">Requirements</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Hidden Layer 1 -->
+                            <div class="neural-layer hidden-layer">
+                                <div class="layer-label">Analysis</div>
+                                <div class="neuron-group">
+                                    <div class="neuron" data-type="research">
+                                        <div class="neuron-core"></div>
+                                        <div class="neuron-label">Research</div>
+                                    </div>
+                                    <div class="neuron" data-type="prototype">
+                                        <div class="neuron-core"></div>
+                                        <div class="neuron-label">Prototype</div>
+                                    </div>
+                                    <div class="neuron" data-type="iterate">
+                                        <div class="neuron-core"></div>
+                                        <div class="neuron-label">Iterate</div>
+                                    </div>
+                                    <div class="neuron" data-type="test">
+                                        <div class="neuron-core"></div>
+                                        <div class="neuron-label">Test</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Hidden Layer 2 -->
+                            <div class="neural-layer hidden-layer">
+                                <div class="layer-label">Implementation</div>
+                                <div class="neuron-group">
+                                    <div class="neuron" data-type="code">
+                                        <div class="neuron-core"></div>
+                                        <div class="neuron-label">Code</div>
+                                    </div>
+                                    <div class="neuron" data-type="document">
+                                        <div class="neuron-core"></div>
+                                        <div class="neuron-label">Document</div>
+                                    </div>
+                                    <div class="neuron" data-type="optimize">
+                                        <div class="neuron-core"></div>
+                                        <div class="neuron-label">Optimize</div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- Output Layer -->
+                            <div class="neural-layer output-layer">
+                                <div class="layer-label">Output</div>
+                                <div class="neuron-group">
+                                    <div class="neuron" data-type="solution">
+                                        <div class="neuron-core"></div>
+                                        <div class="neuron-label">AI Solution</div>
+                                    </div>
+                                    <div class="neuron" data-type="impact">
+                                        <div class="neuron-core"></div>
+                                        <div class="neuron-label">Real Impact</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Neural Connections -->
+                        <div class="neural-connections">
+                            <canvas id="neuralCanvas" width="800" height="400"></canvas>
+                        </div>
+                        
+                        <!-- Activation Indicator -->
+                        <div class="activation-indicator">
+                            <div class="pulse-ring"></div>
+                            <div class="activation-text">Neural Network Active</div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Personal Touch -->
                 <h3 class="section-subtitle fade-in">Fun Fact</h3>
-                <div class="personal-touch fade-in">
-                    <div class="personal-blob">
-                        <span class="personal-icon">🎮</span>
-                        <span class="personal-text">If staying up till 4 AM was a sport, I’d have world records — with AI models as my teammates..</span>
+                <div class="fun-fact-container fade-in">
+                    <div class="terminal-window">
+                        <div class="terminal-header">
+                            <div class="terminal-buttons">
+                                <div class="terminal-button"></div>
+                                <div class="terminal-button"></div>
+                                <div class="terminal-button"></div>
+                            </div>
+                            <div class="terminal-title">soham@ai-engineer ~ fun_facts.sh</div>
+                        </div>
+                        <div class="terminal-content">
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$</span>
+                                <span class="terminal-command">./get_fun_facts.sh</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-output">🎯 <span class="terminal-highlight">Code Perfectionist:</span> I sometimes spend 2 hours perfecting a function that could work in 10 minutes</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-output">🍕 <span class="terminal-highlight">Debug Fuel:</span> Pizza and energy drinks are my debugging companions at 3 AM</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-output">🎮 <span class="terminal-highlight">Gaming Logic:</span> I apply game strategies to solve complex AI problems</span>
+                            </div>
+                            <div class="terminal-line">
+                                <span class="terminal-prompt">$</span>
+                                <span class="terminal-success">Process completed successfully!</span>
+                                <span class="terminal-cursor"></span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="fun-fact-stats">
+                        <div class="stat-item">
+                            <span class="stat-number">☕ 500+</span>
+                            <span class="stat-label">Cups of Coffee</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">🔥 24/7</span>
+                            <span class="stat-label">Debugging Mode</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number">🚀 ∞</span>
+                            <span class="stat-label">Ideas per Day</span>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -1357,36 +2237,140 @@
 
        <!-- Projects Section -->
         <section class="section" id="projects">
-        <h2 class="section-title fade-in">Projects</h2>
-        <div class="projects-grid">
-
-            <div class="card project-card fade-in">
-            <h3>GPT Language Model from Scratch</h3>
-            <p>
-                Built a transformer-based language model from scratch using only Python and NumPy. Implemented tokenization, attention mechanisms, and autoregressive decoding to simulate GPT-like text generation.
-            </p>
+            <h2 class="section-title fade-in">Projects</h2>
+            <div class="projects-showcase-header fade-in">
+                <p class="projects-subtitle">
+                    A collection of AI-powered solutions and machine learning projects that showcase my passion for intelligent systems
+                </p>
             </div>
+            
+            <div class="projects-container">
+                <div class="projects-grid">
+                    <div class="project-card fade-in" data-type="ai">
+                        <div class="project-header">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">GPT Language Model from Scratch</h3>
+                            <p class="project-description">
+                                Built a transformer-based language model from scratch using only Python and NumPy. Implemented multi-head attention, positional encoding, and autoregressive decoding for intelligent text generation.
+                            </p>
+                            <div class="project-tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">NumPy</span>
+                                <span class="tech-tag">Transformers</span>
+                                <span class="tech-tag">NLP</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-status">
+                                    <div class="status-dot"></div>
+                                    <span>Completed</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="project-link" title="View Code">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m18 16 4-4-4-4"/>
+                                            <path d="m6 8-4 4 4 4"/>
+                                            <path d="m14.5 4-5 16"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="project-link" title="Live Demo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                            <polyline points="15,3 21,3 21,9"/>
+                                            <line x1="10" x2="21" y1="14" y2="3"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
-            <div class="card project-card fade-in">
-            <h3>Movie Recommendation System</h3>
-            <p>
-                Developed a hybrid movie recommender using both collaborative and content-based filtering. Provided personalized suggestions based on user preferences, and included genre and rating-based filtering.
-            </p>
-            </div>
-            <div class="card project-card fade-in">
-            <h3>Machine Learning Project (From Scratch)</h3>
-            <p>
-                Created a full machine learning pipeline from scratch, without using ML libraries. Included data preprocessing, manual model training, and accuracy tracking for custom classification tasks.
-            </p>
-            </div>
-        </div>
-        <div class="projects-button-container">
-          <a href="internship.html" class="more-projects-button">
-            View More Projects <span class="arrow-icon">↗</span>
-          </a>
-        </div>
-    </div>
+                    <div class="project-card fade-in" data-type="ml">
+                        <div class="project-header">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">AI Movie Recommendation Engine</h3>
+                            <p class="project-description">
+                                Developed an intelligent recommendation system using collaborative filtering and content-based algorithms. Features user preference analysis, genre clustering, and real-time optimization.
+                            </p>
+                            <div class="project-tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">Pandas</span>
+                                <span class="tech-tag">Scikit-learn</span>
+                                <span class="tech-tag">Flask</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-status">
+                                    <div class="status-dot"></div>
+                                    <span>Completed</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="project-link" title="View Code">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m18 16 4-4-4-4"/>
+                                            <path d="m6 8-4 4 4 4"/>
+                                            <path d="m14.5 4-5 16"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="project-link" title="Live Demo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                            <polyline points="15,3 21,3 21,9"/>
+                                            <line x1="10" x2="21" y1="14" y2="3"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
 
+                    <div class="project-card fade-in" data-type="ai">
+                        <div class="project-header">
+                        </div>
+                        <div class="project-content">
+                            <h3 class="project-title">Neural Network from Scratch</h3>
+                            <p class="project-description">
+                                Created a complete neural network framework without external ML libraries. Implemented backpropagation, gradient descent, and various activation functions for intelligent image classification.
+                            </p>
+                            <div class="project-tech-stack">
+                                <span class="tech-tag">Python</span>
+                                <span class="tech-tag">NumPy</span>
+                                <span class="tech-tag">Computer Vision</span>
+                                <span class="tech-tag">Deep Learning</span>
+                            </div>
+                            <div class="project-stats">
+                                <div class="project-status">
+                                    <div class="status-dot"></div>
+                                    <span>Completed</span>
+                                </div>
+                                <div class="project-links">
+                                    <a href="#" class="project-link" title="View Code">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="m18 16 4-4-4-4"/>
+                                            <path d="m6 8-4 4 4 4"/>
+                                            <path d="m14.5 4-5 16"/>
+                                        </svg>
+                                    </a>
+                                    <a href="#" class="project-link" title="Live Demo">
+                                        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <path d="M18 13v6a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h6"/>
+                                            <polyline points="15,3 21,3 21,9"/>
+                                            <line x1="10" x2="21" y1="14" y2="3"/>
+                                        </svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="projects-button-container">
+                    <a href="internship.html" class="more-projects-button">
+                        <span>View More Projects</span>
+                        <span class="arrow-icon">↗</span>
+                    </a>
+                </div>
+            </div>
         </section>
 
         <!-- Contact Section -->
@@ -1465,39 +2449,6 @@
     <script>
         // Initialize everything when the document is ready
         document.addEventListener('DOMContentLoaded', () => {
-            // Create and setup canvas
-            const canvas = document.createElement('canvas');
-            canvas.id = 'bg-canvas';
-            canvas.style.position = 'fixed';
-            canvas.style.top = '0';
-            canvas.style.left = '0';
-            canvas.style.width = '100%';
-            canvas.style.height = '100%';
-            canvas.style.zIndex = '-1';
-            canvas.style.pointerEvents = 'none';
-            canvas.style.background = '#0a0a0a';
-            document.body.prepend(canvas);
-
-            // Initialize Three.js
-            const renderer = new THREE.WebGLRenderer({
-                canvas,
-                alpha: true
-            });
-            renderer.setSize(window.innerWidth, window.innerHeight);
-            renderer.setPixelRatio(Math.min(window.devicePixelRatio, 2));
-
-            // Create scene and camera
-            const scene = new THREE.Scene();
-            const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-            camera.position.z = 5;
-
-            // Handle window resize
-            window.addEventListener('resize', () => {
-                camera.aspect = window.innerWidth / window.innerHeight;
-                camera.updateProjectionMatrix();
-                renderer.setSize(window.innerWidth, window.innerHeight);
-            });
-
             // Initialize intersection observer for fade-in elements
             const observer = new IntersectionObserver((entries) => {
                 entries.forEach(entry => {
@@ -1512,44 +2463,193 @@
             // Observe all fade-in elements
             document.querySelectorAll('.fade-in').forEach(el => observer.observe(el));
 
-            // Initialize tech stack orbit
+            // Initialize tech stack grid
             const techStack = [
-                { name: 'Scikit-learn', icon: '🐍', description: 'ML & Backend' },
-                { name: 'Transformers', icon: '🔥', description: 'Deep Learning Models' },
-                { name: 'n8n', icon: '📊', description: 'Automation Workflows' },
-                { name: 'Hugging Face', icon: '⚡', description: 'ML Models & APIs' },
-                { name: 'Html/Css/Js', icon: '⚛️', description: 'Web Development' },
-                { name: 'Netlify', icon: '🌍', description: 'Web Hosting' },
-                { name: 'MySQL', icon: '📀', description: 'Databases' },
-                { name: 'Git/Github', icon: '📝', description: 'Version Control' }
+                { name: 'Python', icon: '🐍', description: 'ML & Backend', category: 'ai' },
+                { name: 'PyTorch', icon: '🔥', description: 'Deep Learning', category: 'ai' },
+                { name: 'TensorFlow', icon: '🧠', description: 'ML Framework', category: 'ai' },
+                { name: 'Transformers', icon: '🤖', description: 'NLP Models', category: 'ai' },
+                { name: 'Hugging Face', icon: '🤗', description: 'AI Hub', category: 'ai' },
+                { name: 'OpenAI', icon: '✨', description: 'AI APIs', category: 'ai' },
+                { name: 'JavaScript', icon: '💛', description: 'Frontend', category: 'frontend' },
+                { name: 'React', icon: '⚛️', description: 'UI Library', category: 'frontend' },
+                { name: 'Node.js', icon: '💚', description: 'Backend Runtime', category: 'backend' },
+                { name: 'MongoDB', icon: '🍃', description: 'Database' },
+                { name: 'MySQL', icon: '🗄️', description: 'SQL Database' },
+                { name: 'Git', icon: '📚', description: 'Version Control' },
+                { name: 'Docker', icon: '🐳', description: 'Containers' },
+                { name: 'AWS', icon: '☁️', description: 'Cloud Services' },
+                { name: 'n8n', icon: '📊', description: 'Automation' },
+                { name: 'Netlify', icon: '🌐', description: 'Hosting' }
             ];
 
-            const orbitRing = document.getElementById('orbitRing');
+            const techStackGrid = document.getElementById('techStackGrid');
             
-            // Create and position tech items
+            // Create enhanced tech stack items with categories
             techStack.forEach((tech, index) => {
-                const angle = (index / techStack.length) * Math.PI * 2;
                 const techItem = document.createElement('div');
-                techItem.className = 'tech-item';
+                techItem.className = 'tech-stack-item fade-in';
+                techItem.style.animationDelay = `${index * 0.1}s`;
+                
+                // Add category-based styling
+                const categoryColors = {
+                    'ai': 'rgba(139, 92, 246, 0.15)',
+                    'frontend': 'rgba(59, 130, 246, 0.15)', 
+                    'backend': 'rgba(16, 185, 129, 0.15)',
+                    'database': 'rgba(236, 72, 153, 0.15)',
+                    'tools': 'rgba(245, 158, 11, 0.15)',
+                    'cloud': 'rgba(99, 102, 241, 0.15)'
+                };
+                
+                if (tech.category && categoryColors[tech.category]) {
+                    techItem.style.borderColor = categoryColors[tech.category];
+                }
+                
                 techItem.innerHTML = `
-                    <span class="tech-icon">${tech.icon}</span>
-                    <span class="tech-name">${tech.name}</span>
-                    <span class="tech-description">${tech.description}</span>
+                    <span class="tech-stack-icon">${tech.icon}</span>
+                    <div class="tech-stack-name">${tech.name}</div>
+                    <div class="tech-stack-description">${tech.description}</div>
                 `;
                 
-                // Position in 3D space
-                const radius = 250; // Matches the transform-origin in CSS
-                techItem.style.transform = `
-                    translate(-50%, -50%)
-                    rotateY(${angle}rad)
-                    translateZ(${radius}px)
-                    rotateY(${-angle}rad)
-                    rotateX(0deg)
-                `;
+                // Add hover effect for category-specific glow
+                techItem.addEventListener('mouseenter', () => {
+                    if (tech.category && categoryColors[tech.category]) {
+                        const color = categoryColors[tech.category].replace('0.15', '0.4');
+                        techItem.style.borderColor = color;
+                        techItem.style.boxShadow = `
+                            0 15px 40px rgba(0, 0, 0, 0.2),
+                            0 0 0 1px ${color},
+                            0 0 30px ${color}
+                        `;
+                    }
+                });
                 
-                orbitRing.appendChild(techItem);
+                techItem.addEventListener('mouseleave', () => {
+                    if (tech.category && categoryColors[tech.category]) {
+                        techItem.style.borderColor = categoryColors[tech.category];
+                        techItem.style.boxShadow = '0 4px 20px rgba(0, 0, 0, 0.1)';
+                    }
+                });
+                
+                techStackGrid.appendChild(techItem);
             });
         });
+
+        // Neural Network Animation
+        function initNeuralNetwork() {
+            const canvas = document.getElementById('neuralCanvas');
+            if (!canvas) return;
+            
+            const ctx = canvas.getContext('2d');
+            const rect = canvas.getBoundingClientRect();
+            canvas.width = rect.width;
+            canvas.height = rect.height;
+            
+            const neurons = [];
+            const connections = [];
+            
+            // Get neuron positions
+            document.querySelectorAll('.neuron').forEach((neuron, index) => {
+                const rect = neuron.getBoundingClientRect();
+                const canvasRect = canvas.getBoundingClientRect();
+                neurons.push({
+                    x: rect.left + rect.width/2 - canvasRect.left,
+                    y: rect.top + rect.height/2 - canvasRect.top,
+                    layer: Math.floor(index / 4),
+                    index: index
+                });
+            });
+            
+            // Create connections between layers
+            for (let i = 0; i < neurons.length; i++) {
+                for (let j = 0; j < neurons.length; j++) {
+                    if (neurons[j].layer === neurons[i].layer + 1) {
+                        connections.push({
+                            from: neurons[i],
+                            to: neurons[j],
+                            strength: Math.random() * 0.8 + 0.2,
+                            active: false
+                        });
+                    }
+                }
+            }
+            
+            let animationFrame = 0;
+            
+            function animate() {
+                ctx.clearRect(0, 0, canvas.width, canvas.height);
+                animationFrame++;
+                
+                // Draw connections
+                connections.forEach((conn, index) => {
+                    const pulse = Math.sin((animationFrame + index * 10) * 0.05) * 0.5 + 0.5;
+                    const alpha = conn.strength * pulse * 0.6;
+                    
+                    const gradient = ctx.createLinearGradient(
+                        conn.from.x, conn.from.y,
+                        conn.to.x, conn.to.y
+                    );
+                    gradient.addColorStop(0, `rgba(59, 130, 246, ${alpha})`);
+                    gradient.addColorStop(0.5, `rgba(139, 92, 246, ${alpha * 1.2})`);
+                    gradient.addColorStop(1, `rgba(236, 72, 153, ${alpha})`);
+                    
+                    ctx.strokeStyle = gradient;
+                    ctx.lineWidth = conn.strength * 2 * pulse;
+                    ctx.globalCompositeOperation = 'screen';
+                    
+                    ctx.beginPath();
+                    ctx.moveTo(conn.from.x, conn.from.y);
+                    
+                    // Add curve to connections
+                    const midX = (conn.from.x + conn.to.x) / 2;
+                    const midY = (conn.from.y + conn.to.y) / 2;
+                    const controlY = midY + (Math.sin(animationFrame * 0.02 + index) * 20);
+                    
+                    ctx.quadraticCurveTo(midX, controlY, conn.to.x, conn.to.y);
+                    ctx.stroke();
+                });
+                
+                ctx.globalCompositeOperation = 'source-over';
+                
+                // Draw signal particles
+                connections.forEach((conn, index) => {
+                    const progress = ((animationFrame + index * 30) % 120) / 120;
+                    if (progress < 1) {
+                        const x = conn.from.x + (conn.to.x - conn.from.x) * progress;
+                        const y = conn.from.y + (conn.to.y - conn.from.y) * progress;
+                        
+                        const gradient = ctx.createRadialGradient(x, y, 0, x, y, 8);
+                        gradient.addColorStop(0, 'rgba(139, 92, 246, 1)');
+                        gradient.addColorStop(0.7, 'rgba(59, 130, 246, 0.6)');
+                        gradient.addColorStop(1, 'transparent');
+                        
+                        ctx.fillStyle = gradient;
+                        ctx.beginPath();
+                        ctx.arc(x, y, 6, 0, Math.PI * 2);
+                        ctx.fill();
+                    }
+                });
+                
+                requestAnimationFrame(animate);
+            }
+            
+            animate();
+            
+            // Handle window resize
+            window.addEventListener('resize', () => {
+                setTimeout(() => {
+                    const rect = canvas.getBoundingClientRect();
+                    canvas.width = rect.width;
+                    canvas.height = rect.height;
+                    initNeuralNetwork();
+                }, 100);
+            });
+        }
+
+        // Initialize neural network after page load
+        setTimeout(() => {
+            initNeuralNetwork();
+        }, 1000);
     </script>
     </body>
 </html>
